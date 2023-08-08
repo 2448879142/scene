@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>全景查看器</title>
     <script src="./plugins/aframe-master.js"></script>
+    <style>
 
+    </style>
     <!-- <script>
         AFRAME.registerComponent('play-pause', {
             init: function () {
@@ -24,39 +26,71 @@
         })
 
     </script> -->
-
-</head>
-<body>
-<input type="file" name="" id="default" style="z-index: 1;position: absolute;border: 1px solid #fff;background-color: #ccc;">
-<div id="scene"  style="width: 90vw;height: 80vh;position: absolute;top: 10vh;left: 5vw;">
-</div>
-<script src="./plugins/jquery-3.6.0.min.js"></script>
-<script src="./plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
-<script>
-       $("#default").change(function () {
+  </head>
+  <body>
+    <!-- <div style="display: flex; justify-content: center; margin-top: 20px">
+      <img
+        style="
+          border-radius: 25px;
+          border: #fff 1px solid;
+          box-shadow: #36363670 1px 0 10px;
+        "
+        src="https://img1.imgtp.com/2023/08/08/FjrpEkbT.png"
+        width="50px"
+        height="50px"
+        alt=""
+      />
+    </div> -->
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        margin-top: 50vh;
+        transform: translateY(-100%);
+        font-size: 10vw;
+        color: #363636;
+      "
+    >
+      JangHan
+    </div>
+    <input type="file" name="" id="default" style="z-index: 1; position: absolute; top: 0;" />
+    <div
+      id="scene"
+      style="
+        width: 90vw;
+        height: 80vh;
+        position: absolute;
+        top: 10vh;
+        left: 5vw;
+      "
+    ></div>
+    <script src="./plugins/jquery-3.6.0.min.js"></script>
+    <script src="./plugins/bootstrap-3.4.1/js/bootstrap.js"></script>
+    <script>
+      $("#default").change(function () {
         //获取文件对象
         var file_obj = $(this)[0].files[0];
         var reader = new FileReader();
         reader.readAsDataURL(file_obj);
-        var scenediv = document.getElementById('scene');
-        scenediv.innerHTML='<iframe id="loading" src="loading.html" frameborder="0" style="width: 100%;height: 100%;margin: 0; padding: 0;"></iframe>'
-        
-        reader.onload = function () {
-            var scene = document.createElement('a-scene');
-            var assets = document.createElement('a-assets');
-            var img = document.createElement('img');
-            var sky = document.createElement('a-sky');
-            img.src =reader.result;
-            img.id = "skyTexture";
-            assets.append(img);
-            sky.setAttribute("src","#skyTexture");
-            scene.append(assets);             
-            scene.append(sky);   
-            scenediv.append(scene);
-            scenediv.removeChild(document.getElementById('loading'));
-        }
-    })
-</script>
-</body>
+        var scenediv = document.getElementById("scene");
+        scenediv.innerHTML =
+          '<iframe id="loading" src="loading.html" frameborder="0" style="width: 100%;height: 100%;margin: 0; padding: 0;"></iframe>';
 
+        reader.onload = function () {
+          var scene = document.createElement("a-scene");
+          var assets = document.createElement("a-assets");
+          var img = document.createElement("img");
+          var sky = document.createElement("a-sky");
+          img.src = reader.result;
+          img.id = "skyTexture";
+          assets.append(img);
+          sky.setAttribute("src", "#skyTexture");
+          scene.append(assets);
+          scene.append(sky);
+          scenediv.append(scene);
+          scenediv.removeChild(document.getElementById("loading"));
+        };
+      });
+    </script>
+  </body>
 </html>
